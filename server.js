@@ -1,6 +1,8 @@
 const express = require('express');
 const logger = require('morgan');
 const uploadRoute = require('./routes/upload.js');
+const DBService = require('./service/DB.service');
+
 
 const app = express();
 const port = 3001;
@@ -27,5 +29,7 @@ app.use(function(err, req, res, next) {
     console.error(err.stack);
     res.status(500).send('Something broke!');
 });
+
+DBService.createDB();
 
 app.listen(port, () => console.log(`Phalbum API listening at http://localhost:${port}`));

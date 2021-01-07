@@ -14,7 +14,11 @@ const createDB = () => {
         db.run(`
             CREATE TABLE IF NOT EXISTS photos (
                 id integer PRIMARY KEY,
-                imageFilePath text NOT NULL
+                name text NOT NULL,
+                imageBase64 text NOT NULL,
+                size integer,
+                type text NOT NULL,
+                dateMillis integer                    
             );
         `);
     });
@@ -28,16 +32,21 @@ const deletePhotoTable = () => {
     });
 };
 
-const addPhotoFilePaths = (imageFilePaths) => {
+const saveImages = (images) => {
     db.serialize(() => {
         const stmt = db.prepare(`
             INSERT INTO photos (
-                imageFilePath
+                name,
+                imageBase64,
+                size,
+                type,
+                dateMillis
             )
-            VALUES(?)
+            VALUES(?,?,?,?,?)
         `);
-        for (const imageFilePath of imageFilePaths) {
-            stmt.run(imageFilePath);
+        for (const image of images) {
+            console.log("image: ", image);
+            stmt.run(image.name, image.imageBase64, image.size, image.type, image.dateMillis);
         }
         stmt.finalize((error) => {
             if (error) {
@@ -52,6 +61,6 @@ const addPhotoFilePaths = (imageFilePaths) => {
 
 module.exports = {
     createDB,
-    addPhotoFilePaths,
-    deletePhotoTable
+    deletePhotoTable,
+    saveImages
 };
