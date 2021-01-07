@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 
 // dev = :method :url :status :response-time ms - :res[content-length]
 app.use(logger('dev'));
-app.use(express.json());
+app.use(express.json({limit: '500mb'}));
 app.use(express.text());
 app.use('/api', uploadRoute);
 

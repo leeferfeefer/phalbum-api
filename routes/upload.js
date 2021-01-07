@@ -4,7 +4,6 @@ const router = express.Router();
 const DBService = require('../service/DB.service');
 
 router.post('/upload', function(req, res) {
-    console.log("req body: ", req.body)
     if (req?.body?.images?.length > 0) {
         // Save images here - Do I do one image at a time or all at once?
         res.send("success!")
