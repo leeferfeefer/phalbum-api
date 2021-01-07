@@ -1,0 +1,9 @@
+{
+  "name": "phalbum-api",
+  "version": "1.0.0",
+  "description": "API for phalbum web app",
+  "main": "server.js",
+  "repository": "git@github.com:leeferfeefer/phalbum-api.git",
+  "author": "Dan Fincher",
+  "license": "MIT"
+}
