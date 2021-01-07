@@ -6,6 +6,9 @@
   "repository": "git@github.com:leeferfeefer/phalbum-api.git",
   "author": "Dan Fincher",
   "license": "MIT",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "express": "^4.17.1",
     "morgan": "^1.10.0",

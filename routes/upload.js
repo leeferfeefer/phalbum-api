@@ -1,9 +1,10 @@
 
 const express = require('express');
 const router = express.Router();
-const dbService = require('../service/db.service');
+const DBService = require('../service/DB.service');
 
 router.post('/upload', function(req, res) {
+    console.log("req body: ", req.body)
     if (req?.body?.images?.length > 0) {
         // Save images here - Do I do one image at a time or all at once?
         res.send("success!")
@@ -17,7 +18,5 @@ router.post('/createDB', function(req, res) {
     dbService.addPhotoFilePaths(['somehwere', 'hither', 'there']);
     res.status(200).end();
 });
-
-
 
 module.exports = router;
