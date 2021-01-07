@@ -45,7 +45,6 @@ const saveImages = (images) => {
             VALUES(?,?,?,?,?)
         `);
         for (const image of images) {
-            console.log("image: ", image);
             stmt.run(image.name, image.imageBase64, image.size, image.type, image.dateMillis);
         }
         stmt.finalize((error) => {
