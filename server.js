@@ -1,5 +1,5 @@
 const express = require('express');
-var logger = require('morgan');
+const logger = require('morgan');
 const uploadRoute = require('./routes/upload.js');
 
 const app = express();

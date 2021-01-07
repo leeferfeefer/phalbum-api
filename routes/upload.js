@@ -1,6 +1,7 @@
 
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const dbService = require('../service/db.service');
 
 router.post('/upload', function(req, res) {
     if (req?.body?.images?.length > 0) {
@@ -10,5 +11,13 @@ router.post('/upload', function(req, res) {
         res.status(400).send('Invalid request body!');
     }
 });
+
+router.post('/createDB', function(req, res) {
+    dbService.createDB();
+    dbService.addPhotoFilePaths(['somehwere', 'hither', 'there']);
+    res.status(200).end();
+});
+
+
 
 module.exports = router;
