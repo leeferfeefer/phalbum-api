@@ -6,7 +6,7 @@ const DBService = require('./service/DB.service');
 
 
 const app = express();
-const port = 3001;
+const port = 3000;
 
 
 app.use((req, res, next) => {

@@ -57,9 +57,15 @@ const saveImages = (images) => {
     });
 };
 
-const getImages = () => {
+const getImages = (callback) => {
     db.serialize(() => {
-        
+        db.all("SELECT * FROM photos", function(err, allRows) {
+            if (err) {
+                console.log(err);
+                callback(false);
+            }
+            callback(allRows);        
+        });
     });
 };
 
