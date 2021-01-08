@@ -57,9 +57,16 @@ const saveImages = (images) => {
     });
 };
 
+const getImages = () => {
+    db.serialize(() => {
+        
+    });
+};
+
 
 module.exports = {
     createDB,
     deletePhotoTable,
-    saveImages
+    saveImages,
+    getImages
 };
