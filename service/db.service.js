@@ -63,7 +63,7 @@ const getImages = (index, chunkSize, callback) => {
         db.all(`SELECT * FROM photos LIMIT ${chunkSize} OFFSET ${index*chunkSize}`, function(err, allRows) {
             if (err) {
                 console.log("Error retrieving all images from DB: ", err);
-                callback(false);
+                callback([]);
             }
             callback(allRows);        
         });        
