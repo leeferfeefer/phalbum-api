@@ -57,14 +57,28 @@ const saveImages = (images) => {
     });
 };
 
-const getImages = (callback) => {
+
+const getImages = (index, chunkSize, callback) => {
     db.serialize(() => {
-        db.all("SELECT * FROM photos", function(err, allRows) {
+        db.all(`SELECT * FROM photos LIMIT ${chunkSize} OFFSET ${index*chunkSize}`, function(err, allRows) {
             if (err) {
-                console.log(err);
+                console.log("Error retrieving all images from DB: ", err);
                 callback(false);
             }
             callback(allRows);        
+        });        
+    });
+};
+
+
+const getImageCount = (callback) => {
+    db.serialize(() => {
+        db.get(`SELECT COUNT(*) FROM photos;`, (err, count) => {
+            if (err) {
+                console.log("Error retrieving count from DB: ", err);
+                callback(false);
+            }
+            callback(count);
         });
     });
 };
@@ -74,5 +88,6 @@ module.exports = {
     createDB,
     deletePhotoTable,
     saveImages,
-    getImages
+    getImages,
+    getImageCount
 };
