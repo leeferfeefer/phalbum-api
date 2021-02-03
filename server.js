@@ -1,7 +1,8 @@
 const express = require('express');
 const logger = require('morgan');
-const uploadImageRoute = require('./routes/upload.js');
-const getImageRoute = require('./routes/retrieve.js');
+const UploadImagesRoute = require('./routes/UploadImages');
+const GetImagesRoute = require('./routes/RetrieveImages');
+const ProcessImagesRoute = require('./routes/ProcessImages')
 const DBService = require('./service/DB.service');
 
 
@@ -21,8 +22,9 @@ app.use((req, res, next) => {
 app.use(logger('dev'));
 app.use(express.json({limit: '500mb'}));
 app.use(express.text());
-app.use('/api', uploadImageRoute);
-app.use('/api', getImageRoute);
+app.use('/api', UploadImagesRoute);
+app.use('/api', GetImagesRoute);
+app.use('/api', ProcessImagesRoute);
 
 // built-in error handling
 // NOTE: must be the last piece of middleware in stack

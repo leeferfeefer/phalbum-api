@@ -60,13 +60,23 @@ const saveImages = (images) => {
 
 const getImages = (index, chunkSize, callback) => {
     db.serialize(() => {
-        db.all(`SELECT * FROM photos LIMIT ${chunkSize} OFFSET ${index*chunkSize}`, function(err, allRows) {
-            if (err) {
-                console.log("Error retrieving all images from DB: ", err);
-                callback([]);
-            }
-            callback(allRows);        
-        });        
+        if (chunkSize === -1) {
+            db.all(`SELECT * FROM photos`, function(err, allRows) {
+                if (err) {
+                    console.log("Error retrieving all images from DB: ", err);
+                    callback([]);
+                }
+                callback(allRows);        
+            });  
+        } else {
+            db.all(`SELECT * FROM photos LIMIT ${chunkSize} OFFSET ${index*chunkSize}`, function(err, allRows) {
+                if (err) {
+                    console.log("Error retrieving all images from DB: ", err);
+                    callback([]);
+                }
+                callback(allRows);        
+            });  
+        }            
     });
 };
 
