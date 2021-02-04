@@ -80,6 +80,18 @@ const getImages = (index, chunkSize, callback) => {
     });
 };
 
+const getImagesOneAtATime = (callback) => {
+    db.serialize(() => {
+        db.each(`SELECT * FROM photos`, function(err, row) {
+            if (err) {
+                console.log("Error retrieving image from DB: ", err);
+                callback(false);
+            }
+            callback(row);        
+        });
+    });
+};
+
 
 const getImageCount = (callback) => {
     db.serialize(() => {
@@ -99,5 +111,6 @@ module.exports = {
     deletePhotoTable,
     saveImages,
     getImages,
+    getImagesOneAtATime,
     getImageCount
 };

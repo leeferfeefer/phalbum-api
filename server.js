@@ -2,7 +2,8 @@ const express = require('express');
 const logger = require('morgan');
 const UploadImagesRoute = require('./routes/UploadImages');
 const GetImagesRoute = require('./routes/RetrieveImages');
-const ProcessImagesRoute = require('./routes/ProcessImages')
+const ProcessImagesRoute = require('./routes/ProcessImages');
+const CountImagesRoute = require('./routes/CountImages');
 const DBService = require('./service/DB.service');
 
 
@@ -25,6 +26,7 @@ app.use(express.text());
 app.use('/api', UploadImagesRoute);
 app.use('/api', GetImagesRoute);
 app.use('/api', ProcessImagesRoute);
+app.use('/api', CountImagesRoute);
 
 // built-in error handling
 // NOTE: must be the last piece of middleware in stack

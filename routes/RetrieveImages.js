@@ -10,7 +10,7 @@ router.get('/images', function(req, res) {
         const response = {
             images: []
         };
-        DBService.getImages(index, chunkSize, (rows) => {        
+        DBService.getAllImages(index, chunkSize, (rows) => {        
             response.images = rows;                
             res.json(response);                        
         });                  
